@@ -5,23 +5,23 @@ import java.util.Queue;
 
 public class Base64Encoder {
 
-	
-	public byte[] encode(byte[] byteToEncode){
-		
-		byte[] array  = {122,13,124,126,112};
-		
+	// need to finish method
+	public byte[] encode(byte[] byteToEncode) {
+
+		byte[] array = { 122, 13, 124, 126, 112 };
+
 		StringBuilder encryptedBinary = new StringBuilder();
 		StringBuilder outputEncodedText = new StringBuilder();
 
 		int i = 0;
-		for(byte s:array){
-			
+		for (byte s : array) {
+
 			String tempString = padBinaryNumber(Integer.toBinaryString(s), 8);
 			encryptedBinary.append(tempString);
 			i++;
-			
-			if(i==3){
-				
+
+			if (i == 3) {
+
 				if (encryptedBinary.length() == 8) {
 					encryptedBinary.append("0000");
 
@@ -31,8 +31,7 @@ public class Base64Encoder {
 				}
 				int newInt;
 				while (encryptedBinary.length() != 0) {
-					newInt = Integer.parseInt(encryptedBinary.substring(0, 6),
-							2);
+					newInt = Integer.parseInt(encryptedBinary.substring(0, 6), 2);
 					outputEncodedText.append(Base64.getBase64Character(newInt));
 					encryptedBinary.delete(0, 6);
 				}
@@ -48,10 +47,10 @@ public class Base64Encoder {
 			outputEncodedText.append("=");
 
 		}
-		
-		
+
 		return byteToEncode;
 	}
+
 	public String encode(String textToEncode) {
 
 		Queue<String> inputTextList = new LinkedList<String>();
@@ -94,8 +93,7 @@ public class Base64Encoder {
 			byte[] stringByte = listText.getBytes();
 
 			for (int i = 0; i < stringByte.length; i++) {
-				String tempString = padBinaryNumber(
-						Integer.toBinaryString(stringByte[i]), 8);
+				String tempString = padBinaryNumber(Integer.toBinaryString(stringByte[i]), 8);
 				encryptedBinary.append(tempString);
 
 			}
@@ -109,8 +107,7 @@ public class Base64Encoder {
 			}
 
 			while (encryptedBinary.length() != 0) {
-				int newInt = Integer.parseInt(encryptedBinary.substring(0, 6),
-						2);
+				int newInt = Integer.parseInt(encryptedBinary.substring(0, 6), 2);
 				outputEncodedText.append(Base64.getBase64Character(newInt));
 				encryptedBinary.delete(0, 6);
 			}
